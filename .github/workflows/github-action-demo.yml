@@ -32,3 +32,75 @@ jobs:
     - name: Run tests
       run: |
         echo 'Hello world'
+
+  download_dataset:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install virtualenv
+        python -m virtualenv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run download_dataset
+      run: |
+        python main.py
+      if: github.ref == 'refs/heads/main'
+
+  data_cleaning:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install virtualenv
+        python -m virtualenv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run data_cleaning
+      run: |
+        python main.py
+      if: github.ref == 'refs/heads/main'
+
+  remove_unusefull_columns:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install virtualenv
+        python -m virtualenv venv
+        source venv/bin/activate
+        pip install -r requirements.txt
+
+    - name: Run remove_unusefull_columns
+      run: |
+        python main.py
+      if: github.ref == 'refs/heads/main'
